@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shaahin challenge</title>
+</head>
+<body>
+
+    <h2><div id="resualt">Shaahin..</div></h2>
+
+    <button id="pauseBtn" style="display: none;">End my Task</button>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+
+  var myInterval = setInterval(myTimer, 1000);
+
+  function myTimer(){
+
+     //   Clean Old Result
+    $("#resualt").html('');
+    
+    //  Listen .. Send Requet Ajax
+    $.ajax({url: "get_address.php",
+    // data: { 
+    //         status: $(this).val(),
+    // },
+    success: function(result){
+      
+      if(result !== null && result !== '') {
+        $("#resualt").html(result);
+        stopMyTimer();
+        showPauseBtn();
+      }
+
+      
+    },
+    error: function(result) {
+            alert('error');
+        }
+    });
+
+  }
+
+  function stopMyTimer() {
+    clearInterval(myInterval);
+  }
+
+  function showPauseBtn() {
+    $("#pauseBtn").removeAttr('style');
+  }
+
+  $("#pauseBtn").click(function(){
+    myInterval = setInterval(myTimer, 1000);
+    $("#pauseBtn").attr("style", "display: none;");
+    $("#resualt").html('');
+  });
+
+});
+</script>
+</html>

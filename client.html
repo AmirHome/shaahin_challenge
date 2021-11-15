@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shaahin challenge</title>
+</head>
+<body>
+
+    <h2><div id="resualt">Send Request..</div></h2>
+
+    <button>Get Driver</button>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+
+  $("button").click(function(){
+    //   Clean Old Result
+    $("#resualt").html('..');
+    
+    //  Send Requet Ajax
+    $.ajax({url: "get_driver.php",
+    // data: { 
+    //         status: $(this).val(),
+    // },
+    success: function(result){
+      $("#resualt").html(result);
+    },
+    error: function(result) {
+            alert('error');
+        }
+    });
+  });
+
+});
+</script>
+</html>
